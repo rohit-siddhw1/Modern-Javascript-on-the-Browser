@@ -1,0 +1,1083 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Modern Javascript on the Browser</title>
+
+		<meta name="description" content="A Presentation on using ES6+ features for the Browser">
+		<meta name="author" content="Rohit Siddheshwar">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="./node_modules/reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="./node_modules/reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="./node_modules/reveal.js/dist/theme/black.css" id="theme">
+		<link rel="stylesheet" href="custom-css/main.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="./node_modules/reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section>
+					<h3>Modern Javascript on the Browser</h3>
+					<p>
+						<small> - Resources curated by Rohit Siddheshwar and The Internet!</small>
+					</p>
+				</section>
+
+				<section>
+					<h2>Aim of the Presentation</h2>
+					<ul>
+						<li class="fragment">Understand Modern Javascript</li>
+						<li class="fragment">Understanding the challenges to serve Modern Javascript</li>
+						<li class="fragment">How to serve it across all browsers</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Scope of the Presentation</h2>
+					<h3 class="fragment">Part 1</h3>
+					<ul>
+						<li class="fragment">
+							ES6 and above - ES6, ES7, ES8, ES9, ES10, ES11 and ES12* (the latest)
+							<br>
+							<small class="fragment">Skim through basic features. Will talk more on the interesting ones not used by us till now</small>
+						</li>
+					</ul>
+					<h3 class="fragment">Part 2</h3>
+					<ul>
+						<li class="fragment">Application Bundling and serving</li>
+					</ul>
+				</section>
+
+				<section data-transition="slide-in zoom-out">
+					<h1>Lets start with PART 1!</h1>
+				</section>
+
+				<section>
+					<h2>Overview</h2>
+					<div class="rgs-container">
+						<div class="rgs-block">Variables and scopes</div>
+						<div class="rgs-block">Defaults</div>
+						<div class="rgs-block">Literals</div>
+						<div class="rgs-block">Strings and Regexes</div>
+						<div class="rgs-block">Method Properties</div>
+						<div class="rgs-block">Destructuring Assignment</div>
+						<div class="rgs-block">Classes</div>
+						<div class="rgs-block">Operators</div>
+						<div class="rgs-block">Symbol</div>
+						<div class="rgs-block">Loops</div>
+						<div class="rgs-block">Iterables</div>
+						<div class="rgs-block">Collections</div>
+						<div class="rgs-block">New Built-Ins</div>
+						<div class="rgs-block">Asynchronous Programming</div>
+						<div class="rgs-block">Proxy</div>
+						<div class="rgs-block">Object Properties</div>
+					</div>
+				</section>
+
+				<!-- Variables and scopes. -->
+				<section>
+					<section>
+						<h2>Variables and Scopes</h2>
+					</section>
+
+					<section>
+						<b class="varcolor">const</b>
+						<div class="fragment">
+							<h2>ES 5</h2>
+							<pre data-id="const-es5-slide">
+								<code class="JavaScript" data-trim data-line-numbers>
+									var PI = 3.142;
+									PI = 5; // allowed
+								</code>
+							</pre>
+						</div>
+						<div class="fragment">
+							<h2>ES 6</h2>
+							<pre data-id="const-slide">
+								<code class="JavaScript" data-trim data-line-numbers>
+									const PI = 3.142;
+									PI = 5; // Error - cannot redeclare a const
+								</code>
+							</pre>
+						</div>
+					</section>
+
+					<section>
+						<b class="varcolor">let</b>
+						<div class="fragment">
+							<h2>ES 5</h2>
+							<pre data-id="let-es5-slide">
+								<code class="JavaScript" data-trim data-line-numbers>
+									console.log(x);// undefined
+									var x = 5;
+									console.log(x);// 5
+								</code>
+							</pre>
+						</div>
+						<div class="fragment">
+							<h2>ES 6</h2>
+							<pre data-id="let-es6-slide">
+								<code class="JavaScript" data-trim data-line-numbers>
+									console.log(x);// error - x is not defined
+									let x = 5;
+									console.log(x);
+								</code>
+							</pre>
+						</div>
+					</section>
+
+					<section>
+						<p>Scope of <b class="varcolor">let</b></p>
+						<div class="fragment">
+							<p><b class="varcolor">var</b> has a function scope</p>
+							<pre data-id="let-scope-slide">
+								<code class="JavaScript" data-trim data-line-numbers>
+									function test() {
+										// i is declared as var
+										for (var i = 0; i < 10; i++) {
+											...
+										}
+										console.log(i);// 10
+									}
+									test();
+								</code>
+							</pre>
+						</div>
+					</section>
+
+					<section>
+						<pre data-id="let-scope-slide-2">
+							<code class="JavaScript" data-trim data-line-numbers>
+								function test() {
+									// i is declared as let
+									for (let i = 0; i < 10; i++) {
+										...
+									}
+									console.log(i);// error - i is not defined
+								}
+								test();
+							</code>
+						</pre>
+						<div class="fragment">
+							<p>Block scope</p>
+						</div>
+					</section>
+
+					<section>
+						<h2>Blocks</h2>
+						<div class="fragment">
+							<pre data-id="block-slide">
+								<code class="JavaScript" data-trim data-line-numbers>
+									function test() {
+										let x = 10;
+										{
+											// this is a block
+											// can do some operation without polluting parent scope
+											let x = 20;
+											console.log(x);// 20
+										}
+										console.log(x);// 10
+									}
+									test();
+								</code>
+							</pre>
+						</div>
+					</section>
+					<section>
+						<p>Works with functions also</p>
+						<p>Blocked Scoped Functions</p>
+						<pre data-id="block-slide-2">
+							<code class="JavaScript" data-trim data-line-numbers>
+								function test() {
+									function foo () { return 1; }
+									console.log(foo()); // 1
+
+									{
+										function foo () { return 2; }
+										console.log(foo()); // 2
+									}
+
+									console.log(foo()); // 1
+								}
+								test();
+							</code>
+						</pre>
+					</section>
+
+					<section>
+						<h2>Arrow Functions</h2>
+						<div class="fragment">
+							<h2>ES 5</h2>
+							<pre data-id="func-es5-slide">
+								<code class="JavaScript" data-trim data-line-numbers>
+									var func = function (a) {return a+1;};
+									console.log(func(1));// 2
+								</code>
+							</pre>
+						</div>
+						<div class="fragment">
+							<h2>ES 6</h2>
+							<pre data-id="func-es6-slide">
+								<code class="JavaScript" data-trim data-line-numbers>
+									const func = a => a+1;
+									console.log(func(1));// 2
+								</code>
+							</pre>
+						</div>
+					</section>
+					<section>
+						<h2>Anatomy of the Arrow function</h2>
+						<div class="fragment">
+							<pre data-id="func-anatomy-slide">
+								<code class="JavaScript" data-trim data-line-numbers>
+									let variable = (a, b, c) => {return a + b + c;};
+
+									// if we are just returning a value, we can avoid brackets and return keyword
+									let variable = (a, b, c) => a + b + c;
+
+									// for single arguement, we can avoid paranthesis as well
+									let variable = a => a + 1;
+								</code>
+							</pre>
+						</div>
+					</section>
+					<section>
+						<p><b>Scopes in Arrow Functions</b></p>
+						<div class="fragment">
+							<p>In ES5, we would do this to maintain proper context in callbacks</p>
+							<pre data-id="func-scope-slide">
+								<code class="JavaScript" data-trim data-line-numbers>
+									function dummy(numbers) {
+										var instance = this;// to use current context inside callbacks
+										this.nums = numbers;
+										this.fives = [];
+										this.nums.forEach(function (v) {
+											if (v % 5 === 0) {
+												// if this was used, it will take the current
+												// function context instead of dummy's
+												instance.fives.push(v);
+											}
+										});
+									}
+									var x = new dummy([1,2,3,4,5,6,7,8,9,10]);
+									console.log(x.fives);// [5, 10]
+								</code>
+							</pre>
+						</div>
+					</section>
+					<section>
+						<p>Arrow functions are executed in the declaration context rather than the calling context</p>
+						<pre data-id="func-scope-slide-2">
+							<code class="JavaScript" data-trim data-line-numbers>
+								function dummy(numbers) {
+
+									this.nums = numbers;
+									this.fives = [];
+
+									this.nums.forEach(v => {
+										if (v % 5 === 0) {
+											// this refers to dummy's instance
+											this.fives.push(v);
+										}
+									});
+								}
+								var x = new dummy([1,2,3,4,5,6,7,8,9,10]);
+								console.log(x.fives);// [5, 10]
+							</code>
+						</pre>
+					</section>
+				</section>
+
+				<!-- Defaults. -->
+				<section>
+					<section>
+						<h2>Default Parameters</h2>
+					</section>
+
+					<section>
+						<p>Function params can have default values</p>
+						<pre data-id="defaults-slide">
+							<code class="JavaScript" data-trim data-line-numbers>
+								function increment(base, by = 1) {// default values to params
+									return base + by;
+								}
+								console.log(increment(2, 4));// 6
+								console.log(increment(2));// 3
+							</code>
+						</pre>
+					</section>
+
+					<section>
+						<p>Spread Operator</p>
+						<pre class="fragment" data-id="defaults-slide">
+							<code class="JavaScript" data-trim data-line-numbers>
+								const str = "abcde";
+								const chars = [...str];// ['a','b','c','d','e']
+							</code>
+						</pre>
+					</section>
+					<section>
+						<p>is very usefull for appending or prepending an array or concatinating 2 arrays</p>
+						<pre class="fragment" data-id="defaults-slide">
+							<code class="JavaScript" data-trim data-line-numbers>
+								const arr1 = [1,2,3,4];
+								const arr2 = [0, ...arr1];
+							</code>
+							<code class="JavaScript" data-trim data-line-numbers>
+								const arr1 = [1,2,3,4];
+								const arr2 = [...arr1, 5];
+							</code>
+							<code class="JavaScript" data-trim data-line-numbers>
+								const arr1 = [1,2,3,4];
+								const arr2 = [5,6,7,8];
+								const arr3 = [...arr1, ...arr2];
+							</code>
+						</pre>
+					</section>
+
+					<section>
+						<p>A positive outcome of using the spread operator is that it helps make your code have immutable variables.</p>
+					</section>
+
+					<section>
+						<p>Rest parameter</p>
+						<p class="fragment">add x and y and multiply by number of arguements other than x and y</p>
+						<p class="fragment">ES5</p>
+						<pre class="fragment" data-id="defaults-slide">
+							<code class="JavaScript" data-trim data-line-numbers>
+								function func (x, y) {
+									var a = Array.prototype.slice.call(arguments, 2);
+									return (x + y) * a.length;
+								}
+								console.log(func(1, 2, "hello", true, 7));// 9
+							</code>
+						</pre>
+					</section>
+					<section>
+						<p>ES6</p>
+						<pre data-id="defaults-slide">
+							<code class="JavaScript" data-trim data-line-numbers>
+								// "..." if used to collect elements is called a rest
+								function func (x, y, ...a) {
+									return (x + y) * a.length;
+								}
+								console.log(func(1, 2, "hello", true, 7));// 9
+							</code>
+						</pre>
+					</section>
+				</section>
+
+				<!-- String Literals. -->
+				<section>
+					<section>
+						<h2>String Literals</h2>
+					</section>
+
+					<section>
+						<h2>Template Literals</h2>
+						<pre data-id="literals-slide">
+							<code class="JavaScript" data-trim data-line-numbers>
+								const data = "test";
+								console.log(`we are logging via a variable : ${data}`);
+								// we are logging via a variable : test
+							</code>
+						</pre>
+					</section>
+
+					<section data-background-iframe="https://es6console.com/" data-background-interactive>
+					</section>
+
+					<section>
+						<b>Extended Literals</b>
+						<pre data-id="literals-slide">
+							<code class="JavaScript" data-trim data-line-numbers>
+								let binaryNumber = 0b111110111;
+								let octal = 0o767;
+								console.log(binaryNumber);// 503
+								console.log(octal);// 503
+							</code>
+						</pre>
+						<p class="fragment">No more parseInt !</p>
+					</section>
+
+					<section>
+						<b>Unicodes in Strings and Regexes</b>
+						<pre data-id="literals-slide">
+							<code class="JavaScript" data-trim data-line-numbers>
+								console.log("𠮷".length === 2);// true
+								console.log("𠮷".match(/./u)[0].length === 2);// true
+							</code>
+						</pre>
+					</section>
+				</section>
+
+				<!-- Enhanced Object Properties. -->
+				<section>
+					<section>
+						<h2>Enhanced Object Properties</h2>
+					</section>
+
+					<section>
+						<b>Shorthand properties in objects</b>
+						<pre data-id="obj-slide">
+							<code class="JavaScript" data-trim data-line-numbers>
+								function getPerson(n, s, a) {
+									const name = n;
+									const surname = s;
+									const age = a;
+									// no need to write key name if key name and variable name is the same
+									return {
+										name,
+										surname,
+										age, // trailing commas are allowed now!
+									};
+								}
+								const p = getPerson("Jonas", "Kahnwald", NaN);
+								console.log(p.name);// Jonas
+							</code>
+						</pre>
+					</section>
+
+					<section>
+						<b>Property names can be dynamic while defining</b>
+						<div class="fragment">
+							<b>ES5 way to have cmputed property names</b>
+							<pre data-id="obj-slide">
+								<code class="JavaScript" data-trim data-line-numbers>
+									var obj = {
+										foo: "bar"
+									};
+									obj[ "baz" + quux() ] = 42;
+								</code>
+							</pre>
+						</div>
+
+					</section>
+
+					<section>
+						<b>ES6</b>
+						<pre data-id="obj-slide">
+							<code class="JavaScript" data-trim data-line-numbers>
+								const obj = {
+									foo: "bar",
+									["baz" + quux()]: 42,
+								};
+							</code>
+						</pre>
+					</section>
+
+					<section>
+						<b>Method Properties</b>
+						<pre data-id="obj-slide">
+							<code class="JavaScript" data-trim data-line-numbers>
+								const obj = {
+									foo() {
+										// need not write foo: function () {}
+									}
+								};
+							</code>
+						</pre>
+					</section>
+					
+				</section>
+
+				<!-- Destructuring Assignments -->
+				<section>
+					<section>
+						<h2>Destructuring Assignments</h2>
+					</section>
+
+					<section>
+						<b>Array and Object Assignments!!</b>
+						<pre data-id="obj-slide">
+							<code class="JavaScript" data-trim data-line-numbers>
+								const [a, b] = [1,2];
+								console.log(a, b); // 1, 2
+								const {x, y} = {x: 1, y: 2};
+								console.log(x, y); // 1, 2
+							</code>
+						</pre>
+					</section>
+
+					<section data-background-iframe="https://es6console.com/" data-background-interactive>
+					</section>
+				</section>
+
+				<!-- Classes -->
+				<section>
+					<section>
+						<h2>Classes and OOP</h2>
+					</section>
+
+					<section>
+						<b>The ES5 Way</b>
+						<pre data-id="classes-slide">
+							<code class="JavaScript" data-trim data-line-numbers>
+								var MyClass = function () {
+									//constructor
+								};
+								Shape.prototype.publicMethod = function () {};
+								var ob = new MyClass();
+								ob.publicMethod();
+							</code>
+						</pre>
+						<pre data-id="classes-slide">
+							<code class="JavaScript" data-trim data-line-numbers>
+								function MyClass() {
+
+									_constructor() {}
+								
+									this.publicMethod = function () {};
+
+									_constructor();
+								}
+
+								var ob = new MyClass();
+								ob.publicMethod();
+							</code>
+						</pre>
+					</section>
+
+					<section>
+						<b>The ES6 Way</b>
+						<pre data-id="classes-slide">
+							<code class="JavaScript" data-trim data-line-numbers>
+								class MyClass {
+									constructor () {
+
+									}
+									publicMethod () {
+
+									}
+								}
+
+								const ob = new MyClass();
+								ob.publicMethod();
+							</code>
+						</pre>
+					</section>
+
+					<section>
+						<b>Private methods (tc39 proposal for es12 - June 2021)</b>
+						<pre data-id="classes-slide">
+							<code class="JavaScript" data-trim data-line-numbers>
+								class MyClass {
+									#X = 0; // private variables
+									constructor () {
+
+									}
+									publicMethod () {
+										this.#privateMethod();
+									}
+								
+									#privateMethod () {}
+								}
+
+								const ob = new MyClass();
+								ob.publicMethod();
+							</code>
+						</pre>
+					</section>
+						
+					<section>
+						<b>Inheritence</b>
+						<pre data-id="classes-slide">
+							<code class="JavaScript" data-trim data-line-numbers>
+								class MobileOverlayConfig extends OverlayConfig {
+									constructor() {
+										super();
+									}
+									// custom functions here
+								}
+							</code>
+						</pre>
+					</section>
+
+					<section>
+						<b>Static members</b>
+						<pre data-id="classes-slide">
+							<code class="JavaScript" data-trim data-line-numbers>
+								class MyClass {
+									...
+									static getNewObj() {
+										return new MyClass();
+									}
+								}
+							</code>
+						</pre>
+					</section>
+
+					<section>
+						<b>Getters and Setters</b>
+						<pre data-id="classes-slide">
+							<code class="JavaScript" data-trim data-line-numbers>
+								class MyClass {
+									constructor() {this._a = 0;}
+
+									set a(aValue) {this._a = aValue * 2;}
+									get a() {return this._a % 100;}
+								}
+								const ob = new MyClass();
+								ob.a = 5;
+								console.log(ob.a);// 10
+								ob.a = 50;
+								console.log(ob.a);// 0
+							</code>
+						</pre>
+					</section>
+				</section>
+
+				<!-- Symbol -->
+				<section>
+					<section>
+						<h2>Symbols</h2>
+					</section>
+
+					<section>
+						<b>Unique Immutable data types</b>
+						<pre data-id="classes-slide">
+							<code class="JavaScript" data-trim data-line-numbers>
+								const k = Symbol();
+								const m = Symbol("named");
+								const n = Symbol("named");
+								console.log(m == n, m === n); // false, false
+							</code>
+						</pre>
+					</section>
+
+					<section>
+						<b>Where can they be used?</b>
+						<pre class="fragment" data-id="classes-slide">
+							<code class="JavaScript" data-trim data-line-numbers>
+								const RED_COLOR = Symbol('red');
+								const BLUE_COLOR = Symbol('blue');
+								...
+								function getColorCode(color) {// for code, we can pass around the symbol like an enum
+									switch(color) {
+										case RED_COLOR:
+											return "#FF0000";
+										...
+									}
+								}
+							</code>
+						</pre>
+					</section>
+
+					<section data-background-iframe="https://es6console.com/" data-background-interactive>
+					</section>
+				</section>
+
+				<section data-background-iframe="https://es6console.com/" data-background-interactive>
+				</section>
+
+
+				<section>
+					<section>
+						<h2></h2>
+					</section>
+				</section>
+
+
+
+
+				<section data-auto-animate>
+					<h2 data-id="code-title">Pretty Code</h2>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+						import React, { useState } from 'react';
+
+						function Example() {
+						  const [count, setCount] = useState(0);
+
+						  return (
+						    ...
+						  );
+						}
+					</code></pre>
+					<p>Code syntax highlighting courtesy of <a href="https://highlightjs.org/usage/">highlight.js</a>.</p>
+				</section>
+
+				<section data-auto-animate>
+					<h2 data-id="code-title">With animations</h2>
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers="|4,8-11|17|22-24">
+						import React, { useState } from 'react';
+
+						function Example() {
+						  const [count, setCount] = useState(0);
+
+						  return (
+						    &lt;div&gt;
+						      &lt;p&gt;You clicked {count} times&lt;/p&gt;
+						      &lt;button onClick={() =&gt; setCount(count + 1)}&gt;
+						        Click me
+						      &lt;/button&gt;
+						    &lt;/div&gt;
+						  );
+						}
+
+						function SecondExample() {
+						  const [count, setCount] = useState(0);
+
+						  return (
+						    &lt;div&gt;
+						      &lt;p&gt;You clicked {count} times&lt;/p&gt;
+						      &lt;button onClick={() =&gt; setCount(count + 1)}&gt;
+						        Click me
+						      &lt;/button&gt;
+						    &lt;/div&gt;
+						  );
+						}
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Point of View</h2>
+					<p>
+						Press <strong>ESC</strong> to enter the slide overview.
+					</p>
+					<p>
+						Hold down the <strong>alt</strong> key (<strong>ctrl</strong> in Linux) and click on any element to zoom towards it using <a href="http://lab.hakim.se/zoom-js">zoom.js</a>. Click again to zoom back out.
+					</p>
+					<p>
+						(NOTE: Use ctrl + click in Linux.)
+					</p>
+				</section>
+
+				<section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
+					<h2>Auto-Animate</h2>
+					<p>Automatically animate matching elements across slides with <a href="https://revealjs.com/auto-animate/">Auto-Animate</a>.</p>
+					<div class="r-hstack justify-center">
+						<div data-id="box1" style="background: #999; width: 50px; height: 50px; margin: 10px; border-radius: 5px;"></div>
+						<div data-id="box2" style="background: #999; width: 50px; height: 50px; margin: 10px; border-radius: 5px;"></div>
+						<div data-id="box3" style="background: #999; width: 50px; height: 50px; margin: 10px; border-radius: 5px;"></div>
+					</div>
+				</section>
+				<section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
+					<div class="r-hstack justify-center">
+						<div data-id="box1" data-auto-animate-delay="0" style="background: cyan; width: 150px; height: 100px; margin: 10px;"></div>
+						<div data-id="box2" data-auto-animate-delay="0.1" style="background: magenta; width: 150px; height: 100px; margin: 10px;"></div>
+						<div data-id="box3" data-auto-animate-delay="0.2" style="background: yellow; width: 150px; height: 100px; margin: 10px;"></div>
+					</div>
+					<h2 style="margin-top: 20px;">Auto-Animate</h2>
+				</section>
+				<section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
+					<div class="r-stack">
+						<div data-id="box1" style="background: cyan; width: 300px; height: 300px; border-radius: 200px;"></div>
+						<div data-id="box2" style="background: magenta; width: 200px; height: 200px; border-radius: 200px;"></div>
+						<div data-id="box3" style="background: yellow; width: 100px; height: 100px; border-radius: 200px;"></div>
+					</div>
+					<h2 style="margin-top: 20px;">Auto-Animate</h2>
+				</section>
+
+				<section>
+					<h2>Touch Optimized</h2>
+					<p>
+						Presentations look great on touch devices, like mobile phones and tablets. Simply swipe through your slides.
+					</p>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						## Markdown support
+
+						Write content using inline or external Markdown.
+						Instructions and more info available in the [readme](https://revealjs.com/markdown/).
+
+						```[]
+						<section data-markdown>
+						  ## Markdown support
+
+						  Write content using inline or external Markdown.
+						  Instructions and more info available in the [readme](https://revealjs.com/markdown/).
+						</section>
+						```
+					</script>
+				</section>
+
+				<section>
+					<section id="fragments">
+						<h2>Fragments</h2>
+						<p>Hit the next arrow...</p>
+						<p class="fragment">... to step through ...</p>
+						<p><span class="fragment">... a</span> <span class="fragment">fragmented</span> <span class="fragment">slide.</span></p>
+
+						<aside class="notes">
+							This slide has fragments which are also stepped through in the notes window.
+						</aside>
+					</section>
+					<section>
+						<h2>Fragment Styles</h2>
+						<p>There's different types of fragments, like:</p>
+						<p class="fragment grow">grow</p>
+						<p class="fragment shrink">shrink</p>
+						<p class="fragment fade-out">fade-out</p>
+						<p>
+							<span style="display: inline-block;" class="fragment fade-right">fade-right, </span>
+							<span style="display: inline-block;" class="fragment fade-up">up, </span>
+							<span style="display: inline-block;" class="fragment fade-down">down, </span>
+							<span style="display: inline-block;" class="fragment fade-left">left</span>
+						</p>
+						<p class="fragment fade-in-then-out">fade-in-then-out</p>
+						<p class="fragment fade-in-then-semi-out">fade-in-then-semi-out</p>
+						<p>Highlight <span class="fragment highlight-red">red</span> <span class="fragment highlight-blue">blue</span> <span class="fragment highlight-green">green</span></p>
+					</section>
+				</section>
+
+				<section id="transitions">
+					<h2>Transition Styles</h2>
+					<p>
+						You can select from different transitions, like: <br>
+						<a href="?transition=none#/transitions">None</a> -
+						<a href="?transition=fade#/transitions">Fade</a> -
+						<a href="?transition=slide#/transitions">Slide</a> -
+						<a href="?transition=convex#/transitions">Convex</a> -
+						<a href="?transition=concave#/transitions">Concave</a> -
+						<a href="?transition=zoom#/transitions">Zoom</a>
+					</p>
+				</section>
+
+				<section id="themes">
+					<h2>Themes</h2>
+					<p>
+						reveal.js comes with a few themes built in: <br>
+						<!-- Hacks to swap themes after the page has loaded. Not flexible and only intended for the reveal.js demo deck. -->
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/black.css'); return false;">Black (default)</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/white.css'); return false;">White</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/league.css'); return false;">League</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/sky.css'); return false;">Sky</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/beige.css'); return false;">Beige</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/simple.css'); return false;">Simple</a> <br>
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/serif.css'); return false;">Serif</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/blood.css'); return false;">Blood</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/night.css'); return false;">Night</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/moon.css'); return false;">Moon</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/solarized.css'); return false;">Solarized</a>
+					</p>
+				</section>
+
+				<section>
+					<section data-background="#dddddd">
+						<h2>Slide Backgrounds</h2>
+						<p>
+							Set <code>data-background="#dddddd"</code> on a slide to change the background color. All CSS color formats are supported.
+						</p>
+						<a href="#" class="navigate-down">
+							<img class="r-frame" style="background: rgba(255,255,255,0.1);" width="178" height="238" data-src="https://static.slid.es/reveal/arrow.png" alt="Down arrow">
+						</a>
+					</section>
+					<section data-background="https://static.slid.es/reveal/image-placeholder.png">
+						<h2>Image Backgrounds</h2>
+						<pre><code class="hljs html">&lt;section data-background="image.png"&gt;</code></pre>
+					</section>
+					<section data-background="https://static.slid.es/reveal/image-placeholder.png" data-background-repeat="repeat" data-background-size="100px">
+						<h2>Tiled Backgrounds</h2>
+						<pre><code class="hljs html" style="word-wrap: break-word;">&lt;section data-background="image.png" data-background-repeat="repeat" data-background-size="100px"&gt;</code></pre>
+					</section>
+					<section data-background-video="https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.mp4" data-background-color="#000000">
+						<div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
+							<h2>Video Backgrounds</h2>
+							<pre><code class="hljs html" style="word-wrap: break-word;">&lt;section data-background-video="video.mp4,video.webm"&gt;</code></pre>
+						</div>
+					</section>
+					<section data-background="http://i.giphy.com/90F8aUepslB84.gif">
+						<h2>... and GIFs!</h2>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65" data-background-transition="zoom">
+					<h2>Background Transitions</h2>
+					<p>
+						Different background transitions are available via the backgroundTransition option. This one's called "zoom".
+					</p>
+					<pre><code class="hljs javascript">Reveal.configure({ backgroundTransition: 'zoom' })</code></pre>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c" data-background-transition="zoom">
+					<h2>Background Transitions</h2>
+					<p>
+						You can override background transitions per-slide.
+					</p>
+					<pre><code class="hljs html" style="word-wrap: break-word;">&lt;section data-background-transition="zoom"&gt;</code></pre>
+				</section>
+
+				<section data-background-iframe="https://hakim.se" data-background-interactive>
+					<div style="position: absolute; width: 40%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; font-size: 20px; text-align: left;">
+						<h2>Iframe Backgrounds</h2>
+						<p>Since reveal.js runs on the web, you can easily embed other web content. Try interacting with the page in the background.</p>
+					</div>
+				</section>
+
+				<section>
+					<h2>Marvelous List</h2>
+					<ul>
+						<li>No order here</li>
+						<li>Or here</li>
+						<li>Or here</li>
+						<li>Or here</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Fantastic Ordered List</h2>
+					<ol>
+						<li>One is smaller than...</li>
+						<li>Two is smaller than...</li>
+						<li>Three!</li>
+					</ol>
+				</section>
+
+				<section>
+					<h2>Tabular Tables</h2>
+					<table>
+						<thead>
+							<tr>
+								<th>Item</th>
+								<th>Value</th>
+								<th>Quantity</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Apples</td>
+								<td>$1</td>
+								<td>7</td>
+							</tr>
+							<tr>
+								<td>Lemonade</td>
+								<td>$2</td>
+								<td>18</td>
+							</tr>
+							<tr>
+								<td>Bread</td>
+								<td>$3</td>
+								<td>2</td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+
+				<section>
+					<h2>Clever Quotes</h2>
+					<p>
+						These guys come in two forms, inline: <q cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">The nice thing about standards is that there are so many to choose from</q> and block:
+					</p>
+					<blockquote cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
+						&ldquo;For years there has been a theory that millions of monkeys typing at random on millions of typewriters would
+						reproduce the entire works of Shakespeare. The Internet has proven this theory to be untrue.&rdquo;
+					</blockquote>
+				</section>
+
+				<section>
+					<h2>Intergalactic Interconnections</h2>
+					<p>
+						You can link between slides internally,
+						<a href="#/2/3">like this</a>.
+					</p>
+				</section>
+
+				<section>
+					<h2>Speaker View</h2>
+					<p>There's a <a href="https://revealjs.com/speaker-view/">speaker view</a>. It includes a timer, preview of the upcoming slide as well as your speaker notes.</p>
+					<p>Press the <em>S</em> key to try it out.</p>
+
+					<aside class="notes">
+						Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
+					</aside>
+				</section>
+
+				<section>
+					<h2>Export to PDF</h2>
+					<p>Presentations can be <a href="https://revealjs.com/pdf-export/">exported to PDF</a>, here's an example:</p>
+					<iframe data-src="https://www.slideshare.net/slideshow/embed_code/42840540" width="445" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+				</section>
+
+				<section>
+					<h2>Global State</h2>
+					<p>
+						Set <code>data-state="something"</code> on a slide and <code>"something"</code>
+						will be added as a class to the document element when the slide is open. This lets you
+						apply broader style changes, like switching the page background.
+					</p>
+				</section>
+
+				<section data-state="customevent">
+					<h2>State Events</h2>
+					<p>
+						Additionally custom events can be triggered on a per slide basis by binding to the <code>data-state</code> name.
+					</p>
+					<pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
+Reveal.on( 'customevent', function() {
+	console.log( '"customevent" has fired' );
+} );
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Take a Moment</h2>
+					<p>
+						Press B or . on your keyboard to pause the presentation. This is helpful when you're on stage and want to take distracting slides off the screen.
+					</p>
+				</section>
+
+				<section>
+					<h2>Much more</h2>
+					<ul>
+						<li>Right-to-left support</li>
+						<li><a href="https://revealjs.com/api/">Extensive JavaScript API</a></li>
+						<li><a href="https://revealjs.com/auto-slide/">Auto-progression</a></li>
+						<li><a href="https://revealjs.com/backgrounds/#parallax-background">Parallax backgrounds</a></li>
+						<li><a href="https://revealjs.com/keyboard/">Custom keyboard bindings</a></li>
+					</ul>
+				</section>
+
+				<section style="text-align: left;">
+					<h1>THE END</h1>
+					<p>
+						- <a href="https://slides.com">Try the online editor</a> <br>
+						- <a href="https://github.com/hakimel/reveal.js">Source code &amp; documentation</a>
+					</p>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="./node_modules/reveal.js/dist/reveal.js"></script>
+		<script src="./node_modules/reveal.js/plugin/zoom/zoom.js"></script>
+		<script src="./node_modules/reveal.js/plugin/notes/notes.js"></script>
+		<script src="./node_modules/reveal.js/plugin/search/search.js"></script>
+		<script src="./node_modules/reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="./node_modules/reveal.js/plugin/highlight/highlight.js"></script>
+		<!-- <script src="./custom-js/console.js"></script> -->
+		<script>
+
+			// Also available as an ES module, see:
+			// https://revealjs.com/initialization/
+			Reveal.initialize({
+				width: "100%",
+				controls: true,
+				progress: true,
+				center: true,
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight ]
+			});
+
+		</script>
+
+	</body>
+</html>

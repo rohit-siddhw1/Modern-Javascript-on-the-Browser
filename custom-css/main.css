@@ -1,0 +1,29 @@
+.rgs-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.rgs-container > * {
+    flex-grow: 1;
+}
+
+.rgs-block {
+    padding: 15px;
+    border: 1px solid gray;
+}
+
+.varcolor {
+    color: rgb(226, 2, 88);
+}
+
+.reveal pre.rgs-codeBox {
+    display: block;
+    position: relative;
+    width: 100%;
+    margin: auto;
+    text-align: left;
+    font-size: 0.35em;
+    font-family: monospace;
+    line-height: 0.99em;
+    word-wrap: break-word;
+}
