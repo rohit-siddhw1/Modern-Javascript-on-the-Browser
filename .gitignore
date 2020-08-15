@@ -9,7 +9,8 @@ log/*.log
 tmp/**
 node_modules/
 .sass-cache
-dist/*.map
+dist
+plugin
 .vscode
 .cache
 package-lock.json

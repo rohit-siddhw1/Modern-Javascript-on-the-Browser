@@ -4,12 +4,16 @@
   "description": "MIT licensed",
   "main": "server.js",
   "scripts": {
-    "serve": "http-server"
+    "serve": "http-server",
+    "build": "gulp"
   },
   "keywords": [],
   "author": "rohit.sid",
   "license": "ISC",
   "dependencies": {
     "reveal.js": "^4.0.2"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.2"
   }
 }

@@ -14,13 +14,13 @@
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-		<link rel="stylesheet" href="./node_modules/reveal.js/dist/reset.css">
-		<link rel="stylesheet" href="./node_modules/reveal.js/dist/reveal.css">
-		<link rel="stylesheet" href="./node_modules/reveal.js/dist/theme/black.css" id="theme">
+		<link rel="stylesheet" href="./dist/reset.css">
+		<link rel="stylesheet" href="./dist/reveal.css">
+		<link rel="stylesheet" href="./dist/theme/black.css" id="theme">
 		<link rel="stylesheet" href="css/main.css">
 
 		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="./node_modules/reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+		<link rel="stylesheet" href="./plugin/highlight/monokai.css" id="highlight-theme">
 	</head>
 
 	<body>
@@ -680,7 +680,7 @@
 					<section data-background-iframe="https://es6console.com/" data-background-interactive>
 					</section>
 				</section>
-
+<!-- 
 				<section data-background-iframe="https://es6console.com/" data-background-interactive>
 				</section>
 
@@ -853,7 +853,6 @@
 					<h2>Themes</h2>
 					<p>
 						reveal.js comes with a few themes built in: <br>
-						<!-- Hacks to swap themes after the page has loaded. Not flexible and only intended for the reveal.js demo deck. -->
 						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/black.css'); return false;">Black (default)</a> -
 						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/white.css'); return false;">White</a> -
 						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/league.css'); return false;">League</a> -
@@ -1049,18 +1048,18 @@ Reveal.on( 'customevent', function() {
 						- <a href="https://slides.com">Try the online editor</a> <br>
 						- <a href="https://github.com/hakimel/reveal.js">Source code &amp; documentation</a>
 					</p>
-				</section>
+				</section> -->
 
 			</div>
 
 		</div>
 
-		<script src="./node_modules/reveal.js/dist/reveal.js"></script>
-		<script src="./node_modules/reveal.js/plugin/zoom/zoom.js"></script>
-		<script src="./node_modules/reveal.js/plugin/notes/notes.js"></script>
-		<script src="./node_modules/reveal.js/plugin/search/search.js"></script>
-		<script src="./node_modules/reveal.js/plugin/markdown/markdown.js"></script>
-		<script src="./node_modules/reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="./dist/reveal.js"></script>
+		<script src="./plugin/zoom/zoom.js"></script>
+		<script src="./plugin/notes/notes.js"></script>
+		<script src="./plugin/search/search.js"></script>
+		<script src="./plugin/markdown/markdown.js"></script>
+		<script src="./plugin/highlight/highlight.js"></script>
 		<!-- <script src="./js/console.js"></script> -->
 		
 		<script>
