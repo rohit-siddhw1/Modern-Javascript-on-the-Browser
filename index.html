@@ -1031,7 +1031,7 @@
 
 					<section>
 						<b>Optional Chaining</b>
-						<p>Used when object is to have optional properties</p>
+						<p>Used when object is supposed to have optional properties</p>
 						<pre data-id="code-animation">
 							<code class="JavaScript" data-trim data-line-numbers="1,2,3,4|6,7|8|9|10,11">
 								const getModule = (name) => {
@@ -1157,7 +1157,7 @@
 
 					<section>
 						<b>Promises</b>
-						<pre class="fragment" data-id="code-animation">
+						<pre class="fragment" data-id="code-animation" style="font-size: 18px;">
 							<code class="JavaScript" data-trim data-line-numbers="1,2,3,4,5,6,7,8,9,20,11,12,13|14,15,16">
 								let p = new Promise((resolve, reject) => {
 									setTimeout(() => {
@@ -1185,15 +1185,15 @@
 								let promiseArray = [p1, p2, p3];
 
 								promiseArray.all(() => {
-									... after all promisses are resolved
+									... after all promises are resolved
 								});
 
 								promiseArray.any(() => {
-									... after any on of the promisses is resolved
+									... after any on of the promises is resolved
 								});
 
-								promiseArray.allSetteled(() => {
-									... after all promisses are either resolved or allSetteled
+								promiseArray.allSettled(() => {
+									... after all promises are either resolved or rejected
 									i.e. reached their conclusive state
 								});
 							</code>
@@ -1341,18 +1341,18 @@
 					</section>
 
 					<section>
-						<b>In a backend architecture</b>
-						<div style="background-image: url('./assets/proxy-server.png');"></div>
+						<h2>In a backend architecture</h2>
+						<img src='./assets/proxy-server.png'>
 					</section>
 					<section>
-						<b>In JS</b>
-						<div style="background-image: url('./assets/proxy-js.png');"></div>
+						<h2>In JS</h2>
+						<img src='./assets/proxy-js.png'>
 					</section>
 
 					<section>
 						<b>Proxy API - Better Intercession</b>
 						<pre class="fragment" data-id="code-animation">
-							<code class="JavaScript" data-trim data-line-numbers="1-10|12,13|14|15">
+							<code class="JavaScript" data-trim data-line-numbers="|4|5|6|7">
 								new Proxy(target, handler);
 
 								// target can be anything
@@ -1365,8 +1365,8 @@
 					</section>
 
 					<section>
-						<b>No Transpilation available! (So, Sorry IE users!)</b>
-						<div style="background-image: url(./assets/babel-noproxy.png);"></div>
+						<h2>No Transpilation available!</h2>
+						<img src="./assets/babel-noproxy.png">
 					</section>
 
 					<section>
@@ -1389,7 +1389,7 @@
 					</section>
 
 					<section>
-						<b>For more</b>
+						<b>For more on Meta-Programming</b><br>
 						<a href="https://www.youtube.com/watch?v=_5X2aB_mNp4" target="_blank">
 							Eirik Vullum: JavaScript Metaprogramming - ES6 Proxy Use and Abuse | JSConf Budapest 2017
 						</a>
@@ -1399,12 +1399,12 @@
 
 				<section style="text-align: left;">
 					<h1>THE END</h1>
-					<p>
-						- Presentation made entirely in HTML, CSS and JS!
-						- <a href="">Netlify App url</a>
-						- <a href="">Open Sourced at Github</a>
-						- <a href="https://github.com/hakimel/reveal.js" target="_blank">This Presentation was made using reveal.js</a>
-					</p>
+					<ul>
+						<li>Presentation made entirely in HTML, CSS and JS!</li>
+						<li><a href="https://modern-js-slides.netlify.app/">Netlify App url</a></li>
+						<li><a href="https://github.com/rohit-siddhw1/Modern-Javascript-on-the-Browser">Open Sourced at Github</a></li>
+						<li><a href="https://github.com/hakimel/reveal.js" target="_blank">Made using reveal.js</a></li>
+					</ul>
 				</section>
 
 			</div>
