@@ -887,17 +887,17 @@
 
 								Person.prototype.age = 25;
 
-								var willem = new Person('Willem', 'Groningen');
+								var adam = new Person('Jonas', 'Kahnwald');
 							
 								// this loop through all properties including the prototype
-								for (let trait in willem) {
-									console.log(trait, willem[trait]);
+								for (let trait in adam) {
+									console.log(trait, adam[trait]);
 								}
 	  
-								for (let trait in willem) {
+								for (let trait in adam) {
 									// this loops only through 'own' properties of the object
-									if (willem.hasOwnProperty(trait)) {
-										console.log(trait, willem[trait]);
+									if (adam.hasOwnProperty(trait)) {
+										console.log(trait, adam[trait]);
 									}
 								}
 							</code>
