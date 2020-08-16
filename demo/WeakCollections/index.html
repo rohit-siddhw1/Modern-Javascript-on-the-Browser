@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: white !important;
+        }
+    </style>
+</head>
+<body>
+    <h2>Code that will be triggered!</h2>
+    <pre>
+        const onButtonPress = () => {
+            window.obj = {"a": 1};
+            var wm = new WeakMap();
+            wm.set(window.obj, 4);
+            console.log("Started a 10 sec timer");
+            console.log("delete window.obj to force gc on window.obj");
+            setTimeout(() => {
+                console.log("Check", wm);
+            }, 10000);
+        };        
+    </pre>
+    <button id="checkWeakMaps" style="width: 300px; height: 300px; text-align: center;"> Check Weak Collections Demo ! </button>
+
+    <script src="./code.js"></script>
+</body>
+</html>
