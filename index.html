@@ -180,7 +180,7 @@
 						<h2>Blocks</h2>
 						<div class="fragment">
 							<pre data-id="block-slide">
-								<code class="JavaScript" data-trim data-line-numbers>
+								<code class="JavaScript" data-trim data-line-numbers="1,10|2|3,8|6|7|9">
 									function test() {
 										let x = 10;
 										{
@@ -242,7 +242,7 @@
 						<h2>Anatomy of the Arrow function</h2>
 						<div class="fragment">
 							<pre data-id="func-anatomy-slide">
-								<code class="JavaScript" data-trim data-line-numbers>
+								<code class="JavaScript" data-trim data-line-numbers="1|3,4|5,6">
 									let variable = (a, b, c) => {return a + b + c;};
 
 									// if we are just returning a value, we can avoid brackets and return keyword
@@ -259,7 +259,7 @@
 						<div class="fragment">
 							<p>In ES5, we would do this to maintain proper context in callbacks</p>
 							<pre data-id="func-scope-slide">
-								<code class="JavaScript" data-trim data-line-numbers>
+								<code class="JavaScript" data-trim data-line-numbers="1,12|3|4|5,11|6,10|2,9">
 									function dummy(numbers) {
 										var instance = this;// to use current context inside callbacks
 										this.nums = numbers;
@@ -281,9 +281,9 @@
 					<section>
 						<p>Arrow functions are executed in the declaration context rather than the calling context</p>
 						<pre data-id="func-scope-slide-2">
-							<code class="JavaScript" data-trim data-line-numbers>
+							<code class="JavaScript" data-trim data-line-numbers="2,9">
 								function dummy(numbers) {
-
+									// No need of instance
 									this.nums = numbers;
 									this.fives = [];
 
@@ -310,7 +310,7 @@
 					<section>
 						<p>Function params can have default values</p>
 						<pre data-id="defaults-slide">
-							<code class="JavaScript" data-trim data-line-numbers>
+							<code class="JavaScript" data-trim data-line-numbers="1">
 								function increment(base, by = 1) {// default values to params
 									return base + by;
 								}
@@ -323,7 +323,7 @@
 					<section>
 						<p>Spread Operator</p>
 						<pre class="fragment" data-id="defaults-slide">
-							<code class="JavaScript" data-trim data-line-numbers>
+							<code class="JavaScript" data-trim data-line-numbers="2">
 								const str = "abcde";
 								const chars = [...str];// ['a','b','c','d','e']
 							</code>
@@ -332,15 +332,15 @@
 					<section>
 						<p>is very usefull for appending or prepending an array or concatinating 2 arrays</p>
 						<pre class="fragment" data-id="defaults-slide">
-							<code class="JavaScript" data-trim data-line-numbers>
+							<code class="JavaScript" data-trim data-line-numbers="2">
 								const arr1 = [1,2,3,4];
 								const arr2 = [0, ...arr1];
 							</code>
-							<code class="JavaScript" data-trim data-line-numbers>
+							<code class="JavaScript" data-trim data-line-numbers="2">
 								const arr1 = [1,2,3,4];
 								const arr2 = [...arr1, 5];
 							</code>
-							<code class="JavaScript" data-trim data-line-numbers>
+							<code class="JavaScript" data-trim data-line-numbers="3">
 								const arr1 = [1,2,3,4];
 								const arr2 = [5,6,7,8];
 								const arr3 = [...arr1, ...arr2];
@@ -357,7 +357,7 @@
 						<p class="fragment">add x and y and multiply by number of arguements other than x and y</p>
 						<p class="fragment">ES5</p>
 						<pre class="fragment" data-id="defaults-slide">
-							<code class="JavaScript" data-trim data-line-numbers>
+							<code class="JavaScript" data-trim data-line-numbers="|2">
 								function func (x, y) {
 									var a = Array.prototype.slice.call(arguments, 2);
 									return (x + y) * a.length;
@@ -369,7 +369,7 @@
 					<section>
 						<p>ES6</p>
 						<pre data-id="defaults-slide">
-							<code class="JavaScript" data-trim data-line-numbers>
+							<code class="JavaScript" data-trim data-line-numbers="|2|3">
 								// "..." if used to collect elements is called a rest
 								function func (x, y, ...a) {
 									return (x + y) * a.length;
@@ -377,6 +377,28 @@
 								console.log(func(1, 2, "hello", true, 7));// 9
 							</code>
 						</pre>
+					</section>
+				</section>
+
+				<!-- Destructuring Assignments -->
+				<section>
+					<section>
+						<h2>Destructuring Assignments</h2>
+					</section>
+
+					<section>
+						<b>Array and Object Assignments!!</b>
+						<pre data-id="obj-slide">
+							<code class="JavaScript" data-trim data-line-numbers="|2,4">
+								const [a, b] = [1,2];
+								console.log(a, b); // 1, 2
+								const {x, y} = {x: 1, y: 2};
+								console.log(x, y); // 1, 2
+							</code>
+						</pre>
+					</section>
+
+					<section data-background-iframe="https://es6console.com/" data-background-interactive>
 					</section>
 				</section>
 
@@ -389,7 +411,7 @@
 					<section>
 						<h2>Template Literals</h2>
 						<pre data-id="literals-slide">
-							<code class="JavaScript" data-trim data-line-numbers>
+							<code class="JavaScript" data-trim data-line-numbers="|1">
 								const data = "test";
 								console.log(`we are logging via a variable : ${data}`);
 								// we are logging via a variable : test
@@ -403,7 +425,7 @@
 					<section>
 						<b>Extended Literals</b>
 						<pre data-id="literals-slide">
-							<code class="JavaScript" data-trim data-line-numbers>
+							<code class="JavaScript" data-trim data-line-numbers="|1,2">
 								let binaryNumber = 0b111110111;
 								let octal = 0o767;
 								console.log(binaryNumber);// 503
@@ -433,7 +455,7 @@
 					<section>
 						<b>Shorthand properties in objects</b>
 						<pre data-id="obj-slide">
-							<code class="JavaScript" data-trim data-line-numbers>
+							<code class="JavaScript" data-trim data-line-numbers="|6-10">
 								function getPerson(n, s, a) {
 									const name = n;
 									const surname = s;
@@ -454,13 +476,13 @@
 					<section>
 						<b>Property names can be dynamic while defining</b>
 						<div class="fragment">
-							<b>ES5 way to have cmputed property names</b>
+							<b>ES5 way to have computed property names</b>
 							<pre data-id="obj-slide">
-								<code class="JavaScript" data-trim data-line-numbers>
+								<code class="JavaScript" data-trim data-line-numbers="|4">
 									var obj = {
 										foo: "bar"
 									};
-									obj[ "baz" + quux() ] = 42;
+									obj[ "baz" + fn() ] = 42;
 								</code>
 							</pre>
 						</div>
@@ -473,7 +495,7 @@
 							<code class="JavaScript" data-trim data-line-numbers>
 								const obj = {
 									foo: "bar",
-									["baz" + quux()]: 42,
+									["baz" + fn()]: 42,
 								};
 							</code>
 						</pre>
@@ -494,28 +516,6 @@
 					
 				</section>
 
-				<!-- Destructuring Assignments -->
-				<section>
-					<section>
-						<h2>Destructuring Assignments</h2>
-					</section>
-
-					<section>
-						<b>Array and Object Assignments!!</b>
-						<pre data-id="obj-slide">
-							<code class="JavaScript" data-trim data-line-numbers>
-								const [a, b] = [1,2];
-								console.log(a, b); // 1, 2
-								const {x, y} = {x: 1, y: 2};
-								console.log(x, y); // 1, 2
-							</code>
-						</pre>
-					</section>
-
-					<section data-background-iframe="https://es6console.com/" data-background-interactive>
-					</section>
-				</section>
-
 				<!-- Classes and OOP -->
 				<section>
 					<section>
@@ -525,7 +525,7 @@
 					<section>
 						<b>The ES5 Way</b>
 						<pre data-id="classes-slide">
-							<code class="JavaScript" data-trim data-line-numbers>
+							<code class="JavaScript" data-trim data-line-numbers="|4">
 								var MyClass = function () {
 									//constructor
 								};
@@ -535,7 +535,7 @@
 							</code>
 						</pre>
 						<pre data-id="classes-slide">
-							<code class="JavaScript" data-trim data-line-numbers>
+							<code class="JavaScript" data-trim data-line-numbers="|5">
 								function MyClass() {
 
 									_constructor() {}
@@ -554,7 +554,7 @@
 					<section>
 						<b>The ES6 Way</b>
 						<pre data-id="classes-slide">
-							<code class="JavaScript" data-trim data-line-numbers>
+							<code class="JavaScript" data-trim data-line-numbers="|1-8">
 								class MyClass {
 									constructor () {
 
@@ -573,7 +573,7 @@
 					<section>
 						<b>Private methods (tc39 proposal for es12 - June 2021)</b>
 						<pre data-id="classes-slide">
-							<code class="JavaScript" data-trim data-line-numbers>
+							<code class="JavaScript" data-trim data-line-numbers="|2,7">
 								class MyClass {
 									#X = 0; // private variables
 									constructor () {
@@ -595,7 +595,7 @@
 					<section>
 						<b>Inheritence</b>
 						<pre data-id="classes-slide">
-							<code class="JavaScript" data-trim data-line-numbers>
+							<code class="JavaScript" data-trim data-line-numbers="|1">
 								class MobileOverlayConfig extends OverlayConfig {
 									constructor() {
 										super();
@@ -609,7 +609,7 @@
 					<section>
 						<b>Static members</b>
 						<pre data-id="classes-slide">
-							<code class="JavaScript" data-trim data-line-numbers>
+							<code class="JavaScript" data-trim data-line-numbers="|3">
 								class MyClass {
 									...
 									static getNewObj() {
@@ -623,7 +623,7 @@
 					<section>
 						<b>Getters and Setters</b>
 						<pre data-id="classes-slide">
-							<code class="JavaScript" data-trim data-line-numbers>
+							<code class="JavaScript" data-trim data-line-numbers="|4,5|4,8,10|5,9,11">
 								class MyClass {
 									constructor() {this._a = 0;}
 
@@ -649,7 +649,7 @@
 					<section>
 						<b>Unique Immutable data types</b>
 						<pre data-id="classes-slide">
-							<code class="JavaScript" data-trim data-line-numbers>
+							<code class="JavaScript" data-trim data-line-numbers="1|2|3|4">
 								const k = Symbol();
 								const m = Symbol("named");
 								const n = Symbol("named");
@@ -690,15 +690,13 @@
 						<b>Sets</b>
 						<p class="fragment">All items are unique</p>
 						<pre class="fragment" data-id="classes-slide">
-							<code class="JavaScript" data-trim data-line-numbers>
+							<code class="JavaScript" data-trim data-line-numbers="|4">
 								const set = new Set();
 								set.add("A").add("B").add("B");
 								console.log(set.size);// 2
+								console.log(set.has("A"));// true
 							</code>
 						</pre>
-					</section>
-
-					<section data-background-iframe="https://es6console.com/" data-background-interactive>
 					</section>
 
 					<section>
@@ -706,7 +704,7 @@
 						<p class="fragment">Better versions of JS Objects to be used foe mapping</p>
 						<p class="fragment">Dictionaries!</p>
 						<pre class="fragment" data-id="classes-slide">
-							<code class="JavaScript" data-trim data-line-numbers>
+							<code class="JavaScript" data-trim data-line-numbers="1,2|4-6|8,9|10">
 								const map = new Map();
 								map.set("Potato", 12);
 								
@@ -716,6 +714,7 @@
 
 								console.log(map.get("Potato")); //12
 								console.log(map.get(key)); //20
+								console.log(map.has(key)); //true
 							</code>
 						</pre>
 					</section>
@@ -754,7 +753,7 @@
 							<li class="fragment">
 								<p>for, while, do...while</p>
 								<pre data-id="loops-slide">
-									<code class="JavaScript" data-trim data-line-numbers>
+									<code class="JavaScript" data-trim data-line-numbers="1|3|5">
 										for (let i = 0; i < 10; i++) {...}
 
 										while (//condition) {..code..}
@@ -766,7 +765,7 @@
 							<li class="fragment">
 								<p>for..in</p>
 								<pre data-id="loops-slide">
-									<code class="JavaScript" data-trim data-line-numbers>
+									<code class="JavaScript" data-trim data-line-numbers="|2">
 										const arr = [1,2,3,4,5];
 										for (let i in arr) {...}
 									</code>
@@ -781,7 +780,7 @@
 							<li>
 								<p>Arrays.forEach, Map.forEach, Set.forEach</p>
 								<pre data-id="loops-slide">
-									<code class="JavaScript" data-trim data-line-numbers>
+									<code class="JavaScript" data-trim data-line-numbers="|2-4">
 										const arr = [1,2,3,4,5];
 										arr.forEach((value, index, arrayInstance) => {
 											... code ...
@@ -811,7 +810,7 @@
 							<li>
 								<b>for..of <i class="varcolor">(new)</i></b>
 								<pre data-id="loops-slide">
-									<code class="JavaScript" data-trim data-line-numbers>
+									<code class="JavaScript" data-trim data-line-numbers="1|2-4">
 										const a = [1,2,3,4,5]
 										for (let k of f) {
 											console.log(k);
@@ -880,7 +879,7 @@
 						<b>Iterators</b>
 						<p>JS Objects are inherently not iterable. (Iteration-safe)</p>
 						<pre class="fragment" data-id="loops-slide" style="font-size: 16px;">
-							<code class="JavaScript" data-trim data-line-numbers>
+							<code class="JavaScript" data-trim data-line-numbers="1-4|6|8|11-13|15-20|17">
 								function Person(name, city) {
 									this.name = name;
 									this.city = city;
