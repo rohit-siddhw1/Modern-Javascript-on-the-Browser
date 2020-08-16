@@ -664,7 +664,8 @@
 								const RED_COLOR = Symbol('red');
 								const BLUE_COLOR = Symbol('blue');
 								...
-								function getColorCode(color) {// for code, we can pass around the symbol like an enum
+								// for internal logic, we can pass around the symbol like an enum
+								function getColorCode(color) {
 									switch(color) {
 										case RED_COLOR:
 											return "#FF0000";
