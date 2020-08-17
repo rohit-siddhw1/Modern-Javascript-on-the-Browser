@@ -721,6 +721,13 @@
 						</pre>
 					</section>
 
+					<section data-background-iframe="https://es6console.com/" data-background-interactive>
+					</section>
+
+					<section>
+						<h2>CONSOLE DEMO</h2>
+					</section>
+
 					<section>
 						<h2>WeakSets and WeakMaps</h2>
 						<p class = "fragment">They behave the same way like Maps and Sets except</p>
@@ -729,9 +736,6 @@
 							<li class = "fragment">Keys will be objects only</li>
 							<li class = "fragment">Weak references will be maintained. Will not stop garbage collection from clearing the weakly referenced object key</li>
 						</ol>
-					</section>
-
-					<section data-background-iframe="https://es6console.com/" data-background-interactive>
 					</section>
 
 					<section>
@@ -756,11 +760,11 @@
 								<p>for, while, do...while</p>
 								<pre data-id="loops-slide">
 									<code class="JavaScript" data-trim data-line-numbers="1|3|5">
-										for (let i = 0; i < 10; i++) {...}
+										for (let i = 0; i < 10; i++) {..code..}
 
-										while (//condition) {..code..}
+										while (condition) {..code..}
 
-										do {.. code ..} while(// condition);
+										do {.. code ..} while(condition);
 									</code>
 								</pre>
 							</li>
@@ -882,12 +886,12 @@
 						<p>JS Objects are inherently not iterable. (Iteration-safe)</p>
 						<pre class="fragment" data-id="loops-slide" style="font-size: 16px;">
 							<code class="JavaScript" data-trim data-line-numbers="1-4|6|8|11-13|15-20|17">
-								function Person(name, city) {
-									this.name = name;
-									this.city = city;
+								function Person(firstName, lastName) {
+									this.firstName = firstName;
+									this.lastName = lastName;
 								}
 
-								Person.prototype.age = 25;
+								Person.prototype.age = Infinity;
 
 								var adam = new Person('Jonas', 'Kahnwald');
 							
@@ -904,6 +908,30 @@
 								}
 							</code>
 						</pre>
+					</section>
+
+					<section>
+						<h2>What is an Iterator?</h2>
+						<p class="fragment">Object having the <b class="varcolor">next()</b> function</p>
+						<p class="fragment">Capable of generating the NEXT object</p>
+						<pre class="fragment" data-id="loops-slide">
+							<code class="JavaScript" data-trim data-line-numbers>
+								// Iterator
+								{
+									next() {
+										return {
+											done: false,// last value should have this as true
+											value: ______,
+										}
+									}
+								}
+							</code>
+						</pre>
+					</section>
+
+					<section>
+						<b class="varcolor">Symbol.iterator</b>
+						<p>This enables us to make any object iterable. i.e. we could use for..of on any object</p>
 					</section>
 
 					<section>
