@@ -1021,7 +1021,7 @@
 						<ul>
 							<li>variable Step iterators</li>
 							<li><b>Command line tools:</b> Conditional Questions. (eg: npm init)</li>
-							<li>State Machines</li>
+							<li>State Machines - Redux Saga</li>
 						</ul>
 					</section>
 				</section>
@@ -1038,7 +1038,7 @@
 						<pre data-id="code-animation">
 							<code class="JavaScript" data-trim data-line-numbers>
 
-								x = (a !== null && a !== undefined) ? a : b;
+								x = (a !== undefined) ? a : b;
 
 								// instead of this, you could write
 
@@ -1211,7 +1211,7 @@
 
 					<section>
 						<pre data-id="code-animation">
-							<code class="JavaScript" data-trim data-line-numbers="1|3,4,5|7,8,9|11,12,13,14">
+							<code class="JavaScript" data-trim data-line-numbers="1|3,4,5|7,8,9|11-14|16-19">
 								let promiseArray = [p1, p2, p3];
 
 								promiseArray.all(() => {
@@ -1220,6 +1220,11 @@
 
 								promiseArray.any(() => {
 									... after any on of the promises is resolved
+								});
+
+								promiseArray.race(() => {
+									... after any on of the promises is either resolved or rejected
+									i.e. reached their conclusive state
 								});
 
 								promiseArray.allSettled(() => {
