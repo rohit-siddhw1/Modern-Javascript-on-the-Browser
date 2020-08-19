@@ -1404,6 +1404,65 @@
 					</section>
 
 					<section>
+						<b>What does the Handler look like?</b>
+						<pre class="fragment" data-id="code-animation">
+							<code class="JavaScript" data-trim data-line-numbers>
+								const handler = {
+									trap_1: function (target, ...arguements) {},
+									trap_2: function (target, ...arguements) {},
+									trap_3: function (target, ...arguements) {},
+								};
+							</code>
+						</pre>
+					</section>
+
+					<section>
+						<h2>Traps</h2>
+						<p class="fragment">Traps in this context are methods that provide access to the object in a certain way</p>
+						<pre class="fragment" data-id="code-animation">
+							<code class="JavaScript" data-trim data-line-numbers="1,12|1-5,12|1-12">
+								const handler = {
+									// get trap
+									get: function (target, key) {
+										return key in target ? target[key] : "Not Found!";
+									},
+
+									// set trap
+									set: function (target, key, value) {
+										if (isStringSet(value)) {
+											target[key] = "proxied_" + value;
+										}
+									}
+								};
+							</code>
+						</pre>
+					</section>
+
+					<section>
+						<pre class="fragment" data-id="code-animation">
+							<code class="JavaScript" data-trim data-line-numbers="1|1-2|1-3|1-4|1-5|1-6|1-7">
+								const impObj = {a:"a"};
+								const obj = new Proxy(impObj, handler);
+								obj.b = "b";
+								console.log(obj.a);// a
+								console.log(obj.b);// proxied_b
+								obj.a = "a";
+								console.log(obj.a);// proxied_a
+							</code>
+						</pre>
+					</section>
+
+					<section>
+						<b>Proxies are very powerfull when used with <b class="varcolor">Reflect</b> object</b>
+					</section>
+
+					<section>
+						<b>Reflect</b>
+						<p class="fragment">Reflect is a built-in object that provides methods for interceptable JavaScript operations</p>
+						<a class = "fragment" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect" target = "_blank"><b>Link!</b></a>
+					</section>
+
+					<section>
 						<h2>No Transpilation available!</h2>
 						<img src="./assets/babel-noproxy.png">
 					</section>
