@@ -16,7 +16,7 @@ function shuffle(cards) {
 
 function getCardStack() {
     const suites = "♥️|♦️|♠️|♣️".split("|");
-    const ranks = "A123456789KQJ".split("");
+    const ranks = "A|1|2|3|4|5|6|7|8|9|10|K|Q|J".split("|");
     const cards = [];
     
     for (let suite of suites) {
